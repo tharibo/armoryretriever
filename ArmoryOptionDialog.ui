@@ -5,14 +5,14 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>269</width>
-    <height>157</height>
+    <width>275</width>
+    <height>265</height>
    </rect>
   </property>
   <property name="windowTitle" >
    <string>Dialog</string>
   </property>
-  <layout class="QGridLayout" name="gridLayout" >
+  <layout class="QGridLayout" name="gridLayout_2" >
    <item row="0" column="0" >
     <widget class="QLabel" name="label" >
      <property name="text" >
@@ -54,7 +54,69 @@
      </item>
     </widget>
    </item>
-   <item row="3" column="0" >
+   <item row="3" column="0" colspan="2" >
+    <widget class="QGroupBox" name="mProxySettings" >
+     <property name="enabled" >
+      <bool>true</bool>
+     </property>
+     <property name="title" >
+      <string>Proxy settings</string>
+     </property>
+     <property name="checkable" >
+      <bool>true</bool>
+     </property>
+     <property name="checked" >
+      <bool>false</bool>
+     </property>
+     <layout class="QGridLayout" name="gridLayout" >
+      <item row="0" column="0" >
+       <widget class="QLabel" name="label_5" >
+        <property name="text" >
+         <string>User</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1" >
+       <widget class="QLineEdit" name="mProxyUser" />
+      </item>
+      <item row="1" column="0" >
+       <widget class="QLabel" name="label_6" >
+        <property name="text" >
+         <string>Password</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1" >
+       <widget class="QLineEdit" name="mProxyPassword" >
+        <property name="echoMode" >
+         <enum>QLineEdit::Password</enum>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0" >
+       <widget class="QLabel" name="label_4" >
+        <property name="text" >
+         <string>Host</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1" >
+       <widget class="QLineEdit" name="mProxyHost" />
+      </item>
+      <item row="3" column="0" >
+       <widget class="QLabel" name="label_7" >
+        <property name="text" >
+         <string>Port</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="1" >
+       <widget class="QLineEdit" name="mProxyPort" />
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="4" column="0" >
     <spacer name="verticalSpacer" >
      <property name="orientation" >
       <enum>Qt::Vertical</enum>
@@ -67,7 +129,7 @@
      </property>
     </spacer>
    </item>
-   <item row="4" column="0" colspan="2" >
+   <item row="5" column="0" colspan="2" >
     <widget class="QDialogButtonBox" name="buttonBox" >
      <property name="orientation" >
       <enum>Qt::Horizontal</enum>
@@ -88,8 +150,8 @@
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel" >
-     <x>248</x>
-     <y>254</y>
+     <x>257</x>
+     <y>279</y>
     </hint>
     <hint type="destinationlabel" >
      <x>157</x>
@@ -104,11 +166,11 @@
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel" >
-     <x>316</x>
-     <y>260</y>
+     <x>268</x>
+     <y>279</y>
     </hint>
     <hint type="destinationlabel" >
-     <x>286</x>
+     <x>277</x>
      <y>274</y>
     </hint>
    </hints>

@@ -1,0 +1,24 @@
+#summary One-sentence summary of this page.
+#labels TODO,Phase-Requirements,Phase-Design
+
+= Base work =
+
+== Armory ==
+ * Retrieving character XML on the armory *(done)*
+ * Allow proxy settings *(done)*
+
+== Enhsim ==
+ * Recompute stats and output enhsim config file
+ * Automatically lauch enhsim with our config
+ * Retrieve and exploit enhsim results
+
+= GUI =
+== Base UI ==
+ * Good looking UI using Blizzard icons
+ * Retrieve items stats
+ * Retrieve all items, sort using personal EP, allow EP difference between 2 items
+
+== The future ? ==
+ * Tests batteries for enhsim
+ * Export results for Excel
+ * Graphs

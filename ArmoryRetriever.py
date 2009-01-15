@@ -24,9 +24,8 @@ def retrieveCharacterPage( pCharacterName, pRealmName, pContinentName, pProxyInf
 		prefix = "eu"
 
 	# TODO: Transform names to encode special characters
-	#url = urllib.quote( u'http://%s.wowarmory.com/character-sheet.xml?r=%s&n=%s' % ( prefix, pRealmName, pCharacterName ), u'/:&?=' )
-	url = 'http://%s.wowarmory.com/character-sheet.xml?r=%s&n=%s' % ( prefix, pRealmName, pCharacterName )
-	url = url.encode('UTF8')
+	url = urllib.quote( 'http://%s.wowarmory.com/character-sheet.xml?r=%s&n=%s'
+			% ( prefix, pRealmName.encode('UTF8'), pCharacterName.encode('UTF8') ), '/:&?=' )
 	print url
 
 	userAgent = "Mozilla/5.0 (Windows; U; Windows NT 5.1; fr; rv:1.9.0.5) Gecko/2008120122 Firefox/3.0.5";
@@ -36,16 +35,6 @@ def retrieveCharacterPage( pCharacterName, pRealmName, pContinentName, pProxyInf
 	handle = urllib2.urlopen( request )
 
 	return handle.read()
-
-#	connection = httplib.HTTPConnection(
-#			"http://proxycs-toulouse.si.c-s.fr", "8080" )
-#	connection.connect()
-#	connection.request( "GET", "%s.wowarmory.com/character-sheet.xml?r=%s&n=%s"
-#			% ( prefix, pRealmName, pCharacterName ) )
-#	response = connection.getresponse()
-#	if (response.status == 200 and response.reason == "OK"):
-#		data = response.read()
-#		return data
 
 if __name__ == "__main__":
 	app = QtGui.QApplication(sys.argv)
@@ -59,8 +48,8 @@ if __name__ == "__main__":
 							  'pass' : dialog.mProxyPassword.text(),
 							  'host' : dialog.mProxyHost.text(),
 							  'port' : dialog.mProxyPort.text().toInt()[0] }
-		characterPage = retrieveCharacterPage( dialog.mCharacterName.text(),
-											   dialog.mRealmName.text(),
+		characterPage = retrieveCharacterPage( unicode( dialog.mCharacterName.text() ),
+											   unicode( dialog.mRealmName.text() ),
 											   dialog.mContinent.currentText(),
 											   proxySettings )
 

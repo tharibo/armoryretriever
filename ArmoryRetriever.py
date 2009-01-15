@@ -3,7 +3,7 @@
 """Retrieve your WoW character on the Armory"""
 
 import sys
-import urllib2
+import urllib, urllib2
 from PyQt4 import QtCore, QtGui, uic
 
 
@@ -23,15 +23,23 @@ def retrieveCharacterPage( pCharacterName, pRealmName, pContinentName, pProxyInf
 	if (pContinentName == "EU") :
 		prefix = "eu"
 
-	f = urllib2.urlopen( "http://%s.wowarmory.com/character-sheet.xml?r=%s&n=%s"
-			% ( prefix, pRealmName, pCharacterName ) )
+	# TODO: Transform names to encode special characters
+	#url = urllib.quote( u'http://%s.wowarmory.com/character-sheet.xml?r=%s&n=%s' % ( prefix, pRealmName, pCharacterName ), u'/:&?=' )
+	url = 'http://%s.wowarmory.com/character-sheet.xml?r=%s&n=%s' % ( prefix, pRealmName, pCharacterName )
+	url = url.encode('UTF8')
+	print url
 
-	return f.read()
+	userAgent = "Mozilla/5.0 (Windows; U; Windows NT 5.1; fr; rv:1.9.0.5) Gecko/2008120122 Firefox/3.0.5";
+	headers = { "User-Agent"  : userAgent }
+
+	request = urllib2.Request( url, headers=headers )
+	handle = urllib2.urlopen( request )
+
+	return handle.read()
 
 #	connection = httplib.HTTPConnection(
 #			"http://proxycs-toulouse.si.c-s.fr", "8080" )
 #	connection.connect()
-#	# TODO: Transform names to encode special characters
 #	connection.request( "GET", "%s.wowarmory.com/character-sheet.xml?r=%s&n=%s"
 #			% ( prefix, pRealmName, pCharacterName ) )
 #	response = connection.getresponse()

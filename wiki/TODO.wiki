@@ -6,6 +6,7 @@
 == Armory ==
  * Retrieving character XML on the armory *(done)*
  * Allow proxy settings *(done)*
+ * Check connection errors.
 
 == Enhsim ==
  * Recompute stats and output enhsim config file

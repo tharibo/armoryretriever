@@ -23,9 +23,9 @@ def retrieveCharacterPage( pCharacterName, pRealmName, pContinentName, pProxyInf
 	if (pContinentName == "EU") :
 		prefix = "eu"
 
-	# TODO: Transform names to encode special characters
-	url = urllib.quote( 'http://%s.wowarmory.com/character-sheet.xml?r=%s&n=%s'
-			% ( prefix, pRealmName.encode('UTF8'), pCharacterName.encode('UTF8') ), '/:&?=' )
+	url = 'http://www.python.org/fish.html'
+	#url = urllib.quote( 'http://%s.wowarmory.com/character-sheet.xml?r=%s&n=%s'
+	#		% ( prefix, pRealmName.encode('UTF8'), pCharacterName.encode('UTF8') ), '/:&?=' )
 	print url
 
 	userAgent = "Mozilla/5.0 (Windows; U; Windows NT 5.1; fr; rv:1.9.0.5) Gecko/2008120122 Firefox/3.0.5";
@@ -48,15 +48,26 @@ if __name__ == "__main__":
 							  'pass' : dialog.mProxyPassword.text(),
 							  'host' : dialog.mProxyHost.text(),
 							  'port' : dialog.mProxyPort.text().toInt()[0] }
-		characterPage = retrieveCharacterPage( unicode( dialog.mCharacterName.text() ),
-											   unicode( dialog.mRealmName.text() ),
-											   dialog.mContinent.currentText(),
-											   proxySettings )
 
-	displayer = QtGui.QTextEdit()
-	displayer.setReadOnly( True )
-	displayer.setPlainText( characterPage )
-	displayer.show()
+		try:
+			characterPage = retrieveCharacterPage( unicode( dialog.mCharacterName.text() ),
+												   unicode( dialog.mRealmName.text() ),
+												   dialog.mContinent.currentText(),
+												   proxySettings )
+		except urllib2.URLError, e:
+			QtGui.QMessageBox.critical( None, "Armory Retriever",
+					"Your connection seems broken. Please check your internet/proxy settings.",
+					QtGui.QMessageBox.Ok, QtGui.QMessageBox.NoButton )
+		except urllib2.HTTPError, e:
+			QtGui.QMessageBox.critical( None, "Armory Retriever",
+					"The Armory could'nt fullfill the request. Please try later. Error was %s" % (e.code),
+					QtGui.QMessageBox.Ok, QtGui.QMessageBox.NoButton )
 
-	app.setQuitOnLastWindowClosed( True );
-	sys.exit(app.exec_())
+		else:
+			displayer = QtGui.QTextEdit()
+			displayer.setReadOnly( True )
+			displayer.setPlainText( characterPage )
+			displayer.show()
+
+			app.setQuitOnLastWindowClosed( True )
+			sys.exit( app.exec_() )
